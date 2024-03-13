@@ -5,6 +5,8 @@ import { setTokenAndCookie } from "../utilis/setToken&Cookie.js";
 
 export const Register = async (req, res) => {
   const { fullName, username, profilePic, email, password, gender } = req.body;
+  let girlPic = `https://avatar.iran.liara.run/public/girl?username=${username}`;
+  let boyPic = `https://avatar.iran.liara.run/public/boy?username=${username}`;
 
   try {
     if (!fullName || !username || !email || !password || !gender) {
@@ -28,8 +30,8 @@ export const Register = async (req, res) => {
       username,
       email,
       password: hashedPassword,
-      profilePic,
       gender,
+      profilePic: gender === "Male" ? boyPic : girlPic,
     });
     await newUser.save();
     setTokenAndCookie(newUser._id, res);
@@ -62,11 +64,13 @@ export const Login = async (req, res) => {
         });
       } else {
         const isVerified = await verifyPassword(password, data.password);
+        console.log("this is verified ", isVerified);
         if (!isVerified) {
           res
             .status(403)
             .json({ message: "password is not correct", success: false });
         } else {
+          setTokenAndCookie(data._id, res);
           res
             .status(200)
             .json({ message: "Login Successfully ", success: true });
@@ -82,7 +86,7 @@ export const Login = async (req, res) => {
 };
 export const Logout = (req, res) => {
   try {
-    const isLogout = res.cookie("TOKEN", " ", {
+    const isLogout = res.cookie("token", " ", {
       maxAge: 0,
       httpOnly: true,
       secure: true,
