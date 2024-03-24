@@ -10,8 +10,9 @@ export const setTokenAndCookie = async (data, res) => {
     } else {
       res.cookie("token", token, {
         maxAge: 24 * 60 * 60 * 1000,
-        httpOnly: false,
-        secure: "None",
+        httpOnly: true,
+        sameSite: "None",
+        secure: false,
       });
     }
   } catch (error) {
