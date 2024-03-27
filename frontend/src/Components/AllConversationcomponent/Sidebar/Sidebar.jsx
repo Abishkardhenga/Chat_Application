@@ -6,7 +6,7 @@ import ConversationList from "../CoversationList/ConversationList";
 
 const Sidebar = () => {
   return (
-    <div className="flex flex-col  pl-3 gap-2 w-[50%]">
+    <div className="flex flex-col  pl-3 gap-2 w-[30%]">
       <Searchbar />
       <ConversationList />
       <div className="flex gap-4  items-center">

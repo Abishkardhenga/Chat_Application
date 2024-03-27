@@ -3,10 +3,12 @@ import Home from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
 import NotFoundPage from "./Pages/NoPageFound/Nopagefound";
 import Signup from "./Pages/Signup/Signup";
+import { Toaster } from "react-hot-toast";
 
 export default function App() {
   return (
     <BrowserRouter>
+      <Toaster />
       <Routes>
         <Route path="*" element={<NotFoundPage />} />
         <Route path="/" element={<Home />} />

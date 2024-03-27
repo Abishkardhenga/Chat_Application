@@ -4,12 +4,12 @@ import { hashPassword, verifyPassword } from "../utilis/hashAndDecrypt.js";
 import { setTokenAndCookie } from "../utilis/setToken&Cookie.js";
 
 export const Register = async (req, res) => {
-  const { fullName, username, profilePic, email, password, gender } = req.body;
+  const { username, profilePic, email, password, gender } = req.body;
   let girlPic = `https://avatar.iran.liara.run/public/girl?username=${username}`;
   let boyPic = `https://avatar.iran.liara.run/public/boy?username=${username}`;
 
   try {
-    if (!fullName || !username || !email || !password || !gender) {
+    if (!username || !email || !password || !gender) {
       return res.status(400).json({
         message: "All fields are required",
         success: false,
@@ -26,7 +26,6 @@ export const Register = async (req, res) => {
     const hashedPassword = await hashPassword(password);
 
     const newUser = new UserModel({
-      fullName,
       username,
       email,
       password: hashedPassword,
@@ -49,14 +48,14 @@ export const Register = async (req, res) => {
 };
 
 export const Login = async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
   try {
-    if (!username && !password) {
+    if (!email && !password) {
       res
         .status(403)
         .json({ message: "enter all the credentials ", success: false });
     } else {
-      const data = await UserModel.findOne({ username });
+      const data = await UserModel.findOne({ email });
       if (!data) {
         res.status(403).json({
           message: "No user data is assosciated to this user ",
