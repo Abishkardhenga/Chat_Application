@@ -14,9 +14,11 @@ const NotFoundPage = () => {
         src="https://via.placeholder.com/300"
         alt="Page Not Found"
       />
-      <a href="/" className="text-primary-600 hover:underline">
-        Go back to home
-      </a>
+      <button className="bg-red-600 text-white p-4 rounded-lg">
+        <a href="/" className="text-primary-600 hover:underline">
+          Go back to home
+        </a>
+      </button>
     </div>
   );
 };
