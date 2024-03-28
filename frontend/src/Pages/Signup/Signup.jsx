@@ -20,7 +20,7 @@ const Signup = () => {
 
     const success = await signup(input);
     console.log(success, "this is signup success");
-    if (success) {
+    if (success.status == 201) {
       navigate("/login");
     }
   };

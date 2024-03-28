@@ -12,7 +12,7 @@ const Login = () => {
 
   const handleLogin = async () => {
     const success = await login(input);
-    if (success) {
+    if (success.status == 200) {
       navigate("/");
     }
   };
