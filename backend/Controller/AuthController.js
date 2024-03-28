@@ -53,12 +53,12 @@ export const Login = async (req, res) => {
     if (!email && !password) {
       res
         .status(403)
-        .json({ message: "enter all the credentials ", success: false });
+        .json({ message: "Enter all the credentials ", success: false });
     } else {
       const data = await UserModel.findOne({ email });
       if (!data) {
         res.status(403).json({
-          message: "No user data is assosciated to this user ",
+          message: "Email and password not found !!! ",
           success: false,
         });
       } else {

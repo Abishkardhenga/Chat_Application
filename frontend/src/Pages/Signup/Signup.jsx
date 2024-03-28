@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useSignup from "../../hooks/useSignup";
 
 const Signup = () => {
   const [input, setInput] = useState({
@@ -10,10 +11,18 @@ const Signup = () => {
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
 
-  const handleSignup = () => {
+  const { signup } = useSignup("");
+
+  const handleSignup = async () => {
     console.log(input);
-    toast.success("Successfully registered the user");
+
+    const success = await signup(input);
+    console.log(success, "this is signup success");
+    if (success) {
+      navigate("/login");
+    }
   };
 
   const handleCheckboxChange = (e) => {

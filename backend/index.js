@@ -5,12 +5,20 @@ import UserRoute from "./Route/UserRoute.js";
 import dotenv from "dotenv";
 import { DbConnector } from "./utilis/db.js";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 import { VerifyUser } from "./middleware/VerifyUser.js";
 
 const app = express();
 
 dotenv.config();
 const port = process.env.PORT || 8000;
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    methods: ["GET", "PUT", "PATCH", "DELETE"],
+    credentials: true,
+  })
+);
 app.use(cookieParser());
 app.use(express.json());
 app.use("/hello", VerifyUser, (req, res) => {

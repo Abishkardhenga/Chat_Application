@@ -1,20 +1,22 @@
 import React from "react";
 import toast from "react-hot-toast";
+import axios from "axios";
 
 const useSignup = () => {
   let api = "http://localhost:8000/api/auth/register";
   const signup = async ({ username, email, password, gender, profilePic }) => {
     try {
-      const success = handleError({
+      const errordata = await handleError({
         username,
         email,
         password,
         gender,
         profilePic,
       });
-      if (!success) {
-        return toast.error("somthing is wrong ");
+      if (errordata == false) {
+        return;
       }
+
       const data = await axios.post(api, {
         username,
         email,
@@ -22,30 +24,35 @@ const useSignup = () => {
         gender,
         profilePic,
       });
+
       if (!data) {
-        toast.error(data.error);
+        toast.error("Failed to register");
+        return null;
       } else {
-        toast.success("success");
+        toast.success("Successfully registered");
+        return data;
       }
     } catch (error) {
+      console.log("this is catch blockerror ", error);
       toast.error(error.message);
+
+      return null;
     }
   };
 
-  return;
+  return { signup };
 };
 
-export const handleError = async ({ username, email, password, gender }) => {
-  try {
-    if (!username || !email || !password || !gender) {
-      return toast.error("Enter all the fields");
-    }
-    if (password.length >= 6) {
-      return toast.error("Password is too short.");
-    }
-  } catch (error) {
-    toast.error(error.message);
+export const handleError = ({ username, email, password, gender }) => {
+  if (!username || !email || !password || !gender) {
+    toast.error("Enter all the required fields");
+    return false;
   }
+  if (password.length < 6) {
+    toast.error("Password is too short");
+    return false;
+  }
+  return true;
 };
 
 export default useSignup;
