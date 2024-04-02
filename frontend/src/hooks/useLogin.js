@@ -1,15 +1,23 @@
 import axios from "axios";
-import React from "react";
 import toast from "react-hot-toast";
+import { useCookies } from "react-cookie";
 
 const useLogin = () => {
+  const [cookies, setCookies] = useCookies();
   let api = "http://localhost:8000/api/auth/login";
   const login = async ({ email, password }) => {
     try {
-      const data = await axios.post(api, {
-        email,
-        password,
-      });
+      const data = await axios.post(
+        api,
+        {
+          email,
+          password,
+        },
+        {
+          method: "POST",
+          withCredentials: true,
+        }
+      );
       console.log("this is data", data);
       if (!data) {
         toast.error("some error ");
@@ -19,7 +27,6 @@ const useLogin = () => {
       }
     } catch (error) {
       toast.error(error.response.data.message);
-      console.log("this is error ", error);
     }
   };
   return { login };

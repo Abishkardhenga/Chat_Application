@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import useLogin from "../../hooks/useLogin";
 import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 const Login = () => {
+  const [cookies, setCookies] = useCookies();
   const [input, setInput] = useState({
     email: "",
     password: "",
@@ -11,11 +13,20 @@ const Login = () => {
   const { login } = useLogin();
 
   const handleLogin = async () => {
-    const success = await login(input);
-    if (success.status == 200) {
-      navigate("/");
+    try {
+      const success = await login(input);
+      if (success && success.status === 200) {
+        navigate("/");
+      } else {
+        // Handle login failure, e.g., show an error message
+        console.log("Login failed");
+      }
+    } catch (error) {
+      console.error("Error during login:", error.message);
+      // Handle error, e.g., show an error message to the user
     }
   };
+
   return (
     <section class="bg-[rgb(49,9,9)] w-[100%] h-[100%] dark:bg-gray-900 border border-blue-300">
       <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
