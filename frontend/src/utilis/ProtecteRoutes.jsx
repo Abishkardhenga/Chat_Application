@@ -13,10 +13,9 @@ const ProtectedRoutes = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log("this is coolkies", cookies);
       try {
         if (!cookies.token) {
-          console.log("no cookie is available");
+          token.error("No access  , Please Login  !");
           return;
         }
 
@@ -27,7 +26,6 @@ const ProtectedRoutes = () => {
             withCredentials: true,
           }
         );
-        console.log("this is response", response);
 
         if (response.status === 200) {
           dispatch({ type: "setUserdata", payload: response.data });
