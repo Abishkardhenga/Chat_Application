@@ -11,8 +11,6 @@ export const VerifyUser = async (req, res, next) => {
     }
 
     const userVerified = jwt.verify(cookie, process.env.SECRETKEY);
-    // console.log("this is userviefied ", userVerified);
-    // console.log("this is userviefied id", userVerified.data);
     const user = await UserModel.findById(userVerified.data).select(
       "-password"
     );
@@ -22,7 +20,6 @@ export const VerifyUser = async (req, res, next) => {
     req.user = user;
     next();
   } catch (error) {
-    // Token is either invalid or expired
     res
       .status(401)
       .json({ message: "Token is invalid or expired", success: false });

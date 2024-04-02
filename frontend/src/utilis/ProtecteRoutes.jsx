@@ -42,7 +42,7 @@ const ProtectedRoutes = () => {
     };
 
     fetchData();
-  }, [cookies, state, dispatch]);
+  }, [cookies, cookies.token]);
 
   if (!loading) {
     return <div>Loading...</div>;

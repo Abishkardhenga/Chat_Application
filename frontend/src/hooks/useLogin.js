@@ -1,9 +1,7 @@
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useCookies } from "react-cookie";
 
 const useLogin = () => {
-  const [cookies, setCookies] = useCookies();
   let api = "http://localhost:8000/api/auth/login";
   const login = async ({ email, password }) => {
     try {

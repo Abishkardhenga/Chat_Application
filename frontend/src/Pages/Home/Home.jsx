@@ -6,7 +6,7 @@ import ChatList from "../../Components/AllChatComponent/ChatList/ChatList";
 import Noconversation from "../../Components/NoConversation/Noconversation";
 
 const Home = () => {
-  const [isthereConversation, setConversation] = useState(true);
+  const [isthereConversation, setConversation] = useState(false);
   return (
     <div className="flex  bg-[hsl(0,69%,11%)] justify-center items-center h-screen w-screen">
       <div className="flex h-[96%] bg-white w-[90%]">

@@ -86,9 +86,8 @@ export const Login = async (req, res) => {
 export const Logout = (req, res) => {
   try {
     const isLogout = res.cookie("token", " ", {
-      maxAge: 0,
-      httpOnly: true,
-      secure: true,
+      httpOnly: false,
+      maxAge: 0 * 0 * 0 * 0,
     });
     if (!isLogout) {
       res.status(403).json({ message: "logout failed", success: false });

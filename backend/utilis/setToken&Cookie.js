@@ -9,10 +9,10 @@ export const setTokenAndCookie = async (data, res) => {
       console.log("failed to create the token");
     } else {
       res.cookie("token", token, {
+        httpOnly: false,
         maxAge: 24 * 60 * 60 * 1000,
-        httpOnly: true,
-        sameSite: "None",
-        secure: false,
+        // sameSite: "None",
+        // secure: false,
       });
     }
   } catch (error) {

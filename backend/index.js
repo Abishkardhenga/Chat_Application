@@ -7,6 +7,7 @@ import { DbConnector } from "./utilis/db.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import { VerifyUser } from "./middleware/VerifyUser.js";
+import { userVerified } from "./Controller/userVerified.js";
 
 const app = express();
 
@@ -21,9 +22,11 @@ app.use(
 );
 app.use(cookieParser());
 app.use(express.json());
-app.use("/hello", VerifyUser, (req, res) => {
-  res.send("hello dost");
+
+app.get("/hello", VerifyUser, (req, res) => {
+  res.send("hello");
 });
+
 app.use("/api/auth", AuthRoutes);
 app.use("/api", MessageRoute);
 app.use("/api/users", UserRoute);
