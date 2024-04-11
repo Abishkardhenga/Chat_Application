@@ -45,10 +45,10 @@ export const getMessage = async (req, res) => {
       participants: { $all: [senderId, usertoChatId] },
     }).populate("messages");
     if (!conversation) {
-      res.status(200).json([]);
+      return res.status(200).json([]);
     }
     res.status(200).json({ message: conversation.messages, success: true });
   } catch (error) {
-    res.status(403).json({ message: error.message, success: false });
+    res.status(403).json({ message: error, success: false });
   }
 };

@@ -16,7 +16,7 @@ const useLogin = () => {
           withCredentials: true,
         }
       );
-      console.log("this is data", data);
+      // console.log("this is data", data);
       if (!data) {
         toast.error("some error ");
       } else {

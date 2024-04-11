@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { IoSend } from "react-icons/io5";
 import { LuImagePlus } from "react-icons/lu";
 import { BsFillEmojiSmileFill } from "react-icons/bs";
+import { useSendMessage } from "../../../hooks/useSendMessage";
 
 const ChatInput = () => {
+  const { sendMessage, loading } = useSendMessage();
+  const [inputmessage, setinputMessage] = useState("");
+  const handleInput = async (e) => {
+    if (!sendMessage) return;
+    const ms = await sendMessage(inputmessage);
+    console.log(inputmessage);
+    console.log("mes", ms);
+    setinputMessage("");
+  };
   return (
     <div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-700">
       <button
@@ -18,12 +28,24 @@ const ChatInput = () => {
       >
         <BsFillEmojiSmileFill />
       </button>
-      <input type="text" className="w-[80%]" placeholder="enter the message" />
+      <input
+        type="text"
+        className="w-[80%]"
+        value={inputmessage}
+        onChange={(e) => {
+          setinputMessage(e.target.value);
+        }}
+        placeholder="enter the message"
+      />
       <button
         type="submit"
         class="inline-flex ml-4 justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600"
       >
-        <IoSend />
+        <IoSend
+          onClick={() => {
+            handleInput();
+          }}
+        />
       </button>
     </div>
   );

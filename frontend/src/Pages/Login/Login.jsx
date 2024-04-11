@@ -22,7 +22,7 @@ const Login = () => {
         console.log("Login failed");
       }
     } catch (error) {
-      console.error("Error during login:", error.message);
+      console.error("Error during login:", error);
       // Handle error, e.g., show an error message to the user
     }
   };

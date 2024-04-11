@@ -28,6 +28,7 @@ const ProtectedRoutes = () => {
         );
 
         if (response.status === 200) {
+          console.log("this is response", response);
           dispatch({ type: "setUserdata", payload: response.data });
         } else {
           console.log("Error verifying user. Status:", response.status);
@@ -47,6 +48,7 @@ const ProtectedRoutes = () => {
   }
 
   if (state?.userdata) {
+    console.log("this is userData ", state.userdata);
     return <Outlet />;
   } else {
     toast.error("You are not authorized . Please Login !");
