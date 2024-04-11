@@ -5,12 +5,12 @@ import { useConversation } from "../../../zustand/useConversation";
 
 const ConversationList = () => {
   const { error, data } = useGetConversation();
-  console.log("this is data", data);
+  // console.log("this is data", data);
 
   return (
     <div className="flex flex-col gap-2 w-[100%] h-[80%]  overflow-auto">
-      {data.message?.map((item) => {
-        return <Conversation item={item} />;
+      {data.message?.map((item, key) => {
+        return <Conversation key={key} item={item} />;
       })}
     </div>
   );

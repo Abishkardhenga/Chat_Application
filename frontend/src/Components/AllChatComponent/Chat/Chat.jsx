@@ -9,8 +9,8 @@ const Chat = ({ item }) => {
   const styles = myChat ? "  flex-row-reverse" : " ";
   const bgstyles = myChat ? "bg-[rgb(9,100,157)]" : " bg-white";
   const textColor = myChat ? "text-white" : "text-black";
-  console.log("this is selecteConversation", selectedConversation);
-  console.log("this is item", item);
+  // console.log("this is selecteConversation", selectedConversation);
+  // console.log("this is item", item);
   return (
     <div class={`  flex p-4 ${styles}  items-start gap-2.5`}>
       <img

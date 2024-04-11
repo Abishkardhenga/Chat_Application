@@ -7,21 +7,20 @@ import { DbConnector } from "./utilis/db.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import { VerifyUser } from "./middleware/VerifyUser.js";
-import { userVerified } from "./Controller/userVerified.js";
-
-const app = express();
+import { app, io, server } from "./socket.js";
 
 dotenv.config();
 const port = process.env.PORT || 8000;
+
 app.use(
   cors({
     origin: "http://localhost:5173",
-    methods: ["GET", "PUT", "PATCH", "DELETE"],
+    methods: ["GET", "PUT", "POST", "PATCH", "DELETE"],
     credentials: true,
   })
 );
-app.use(cookieParser());
 app.use(express.json());
+app.use(cookieParser());
 
 app.get("/hello", VerifyUser, (req, res) => {
   res.send("hello");
@@ -31,7 +30,7 @@ app.use("/api/auth", AuthRoutes);
 app.use("/api", MessageRoute);
 app.use("/api/users", UserRoute);
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server started at port ${port}`);
   DbConnector();
 });

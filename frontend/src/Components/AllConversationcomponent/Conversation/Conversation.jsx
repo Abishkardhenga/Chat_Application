@@ -7,16 +7,19 @@ const Conversation = ({ item }) => {
 
   return (
     <div
-      className={`flex p-4 cursor-pointer hover:bg-blue-900 gap-2   ${
+      className={`flex p-4 cursor-pointer hover:bg-blue-900 gap-2 ${
         isSelected ? "bg-blue-900" : ""
       }`}
       onClick={() => setselectedConversation(item)}
     >
-      <img
-        class={"w-8 h-8 rounded-full"}
-        src={item.profilePic}
-        alt="Jese image"
-      />
+      <div className="relative">
+        <img
+          className="w-8 h-8 rounded-full"
+          src={item.profilePic}
+          alt="User profile"
+        />
+        <div className="w-2 h-2 bg-[rgb(0,226,0)] rounded-full absolute top-0 right-0"></div>
+      </div>
       <p>{item.username}</p>
     </div>
   );
