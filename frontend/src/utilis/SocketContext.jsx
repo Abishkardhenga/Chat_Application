@@ -24,16 +24,16 @@ export const SocketContextProvider = ({ children }) => {
       setSocket(newSocket);
       newSocket.on("getOnlineUsers", (users) => {
         setOnlineUsers(users);
-        console.log("setuser", users);
-        console.log("oneline user", onlineUsers);
+        // console.log("setuser", users);
+        // console.log("oneline user", onlineUsers);
       });
 
-      console.log("this is 0", newSocket);
+      // console.log("this is 0", newSocket);
       return () => {
         if (socket) {
           socket.close();
           setSocket(null);
-          console.log("this is 1");
+          // console.log("this is 1");
         }
       };
     }

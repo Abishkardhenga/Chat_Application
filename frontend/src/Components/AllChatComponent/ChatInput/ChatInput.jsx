@@ -7,11 +7,11 @@ import { useSendMessage } from "../../../hooks/useSendMessage";
 const ChatInput = () => {
   const { sendMessage, loading } = useSendMessage();
   const [inputmessage, setinputMessage] = useState("");
-  const handleInput = async (e) => {
+  const handleInput =  (e) => {
+    alert("click")
     if (!sendMessage) return;
-    const ms = await sendMessage(inputmessage);
+       sendMessage(inputmessage);
     console.log(inputmessage);
-    console.log("mes", ms);
     setinputMessage("");
   };
   return (
